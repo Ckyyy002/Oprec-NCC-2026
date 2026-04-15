@@ -95,6 +95,8 @@ def health_check():
 
 ## 3. Bukti Endpoint dapat Diakses
 
+<img width="1473" height="120" alt="screenshot-2026-04-15_07 58 58" src="https://github.com/user-attachments/assets/3491b124-fbe0-435f-b8eb-5d60dcf53ee6" />
+
 Endpoint `/health` berhasil diakses secara publik dari luar VPS menggunakan `curl`:
 
 ```
