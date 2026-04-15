@@ -8,8 +8,6 @@
 
 **IP Publik:** [20.205.136.147](http://20.205.136.147/health)
 
-**Bahasa / Framework:** Python 3.12 / FastAPI + Uvicorn
-
 ---
 
 ## 1. Deskripsi Singkat Service
