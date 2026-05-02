@@ -2,6 +2,10 @@
 
 > **Oprec NCC Laboratory 2026 – Pertemuan 2**
 
+> Nama: Lucky Himawan Prasetya
+
+> NRP: 5025241147
+
 ---
 
 ## Arsitektur
