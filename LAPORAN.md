@@ -499,10 +499,8 @@ Screenshot channel Discord yang menampilkan embed notifikasi berwarna hijau bert
 
 **Solusi:** Hapus flag `--env PATH=...` dari perintah `docker run`. PATH untuk Go dan sonar-scanner sudah di-set di dalam Dockerfile via `ENV`, tidak perlu di-override dari luar.
 
-Selain itu, container `jenkins-docker` (DinD) menggunakan flag `--rm` sehingga hilang setiap kali VM restart. Jalankan selalu dalam urutan berikut setiap VM dinyalakan:
 
 ```bash
-# 1. Jalankan DinD terlebih dahulu
 docker run \
   --name jenkins-docker \
   --rm --detach --privileged \
@@ -514,8 +512,6 @@ docker run \
   --publish 2376:2376 \
   docker:dind --storage-driver overlay2
 
-# 2. Jenkins akan auto-restart karena --restart=on-failure
-# Atau jalankan manual jika belum running:
 docker start jenkins-blueocean
 ```
 
