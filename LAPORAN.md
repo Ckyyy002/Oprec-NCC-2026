@@ -437,7 +437,7 @@ Screenshot Console Output dari build terakhir yang menunjukkan log tiap stage be
 
 > Lokasi: [http://20.205.129.74:8080/job/demo-jenkins-pipeline/17/console](http://20.205.129.74:8080/job/demo-jenkins-pipeline/17/console)
 
-[File Console Output](./#17.txt)
+[File Console Output](https://github.com/Ckyyy002/Oprec-NCC-2026/blob/module-2/%2317.txt)
 
 ---
 
