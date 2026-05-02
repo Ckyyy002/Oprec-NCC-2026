@@ -493,8 +493,6 @@ Screenshot channel Discord yang menampilkan embed notifikasi berwarna hijau bert
 
 ### 1. Jenkins tidak bisa start setelah VM di-restart
 
-<img width="1854" height="113" alt="screenshot-2026-05-02_10 52 45" src="https://github.com/user-attachments/assets/27b94095-6090-4b38-af81-1cb85fcdebb5" />
-
 **Gejala:** `exec: java: not found` di logs Jenkins.
 
 **Penyebab:** Flag `--env PATH=...` saat `docker run` menimpa PATH default container sehingga Java tidak ditemukan.
