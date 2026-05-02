@@ -1,0 +1,228 @@
+Started by user Lucky Himawan Prasetya
+Obtained Jenkinsfile from git https://github.com/Ckyyy002/demo-jenkins.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/demo-jenkins-pipeline
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential github-credentials
+Cloning the remote Git repository
+Cloning repository https://github.com/Ckyyy002/demo-jenkins.git
+ > git init /var/jenkins_home/workspace/demo-jenkins-pipeline # timeout=10
+Fetching upstream changes from https://github.com/Ckyyy002/demo-jenkins.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+using GIT_ASKPASS to set credentials github credentials
+ > git fetch --tags --force --progress -- https://github.com/Ckyyy002/demo-jenkins.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/Ckyyy002/demo-jenkins.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 0f40c1e24176fdd235d39ef1d956203b85c0cded (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 0f40c1e24176fdd235d39ef1d956203b85c0cded # timeout=10
+Commit message: "Refactor SonarQube analysis stage in Jenkinsfile"
+ > git rev-list --no-walk 0f40c1e24176fdd235d39ef1d956203b85c0cded # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of $DISCORD_WEBHOOK or $SONAR_TOKEN
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential github-credentials
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/demo-jenkins-pipeline/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Ckyyy002/demo-jenkins.git # timeout=10
+Fetching upstream changes from https://github.com/Ckyyy002/demo-jenkins.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+using GIT_ASKPASS to set credentials github credentials
+ > git fetch --tags --force --progress -- https://github.com/Ckyyy002/demo-jenkins.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 0f40c1e24176fdd235d39ef1d956203b85c0cded (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 0f40c1e24176fdd235d39ef1d956203b85c0cded # timeout=10
+Commit message: "Refactor SonarQube analysis stage in Jenkinsfile"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] sh
++ go version
+go version go1.23.2 linux/amd64
+[Pipeline] sh
++ go build ./...
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] sh
++ go test ./... -v
+?   	demo-jenkins	[no test files]
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (SonarQube Analysis)
+[Pipeline] withSonarQubeEnv
+Injecting SonarQube environment variables using the configuration: sonarqube
+[Pipeline] {
+[Pipeline] sh
+Warning: A secret was passed to "sh" using Groovy String interpolation, which is insecure.
+		 Affected argument(s) used the following variable(s): [SONAR_TOKEN]
+		 See https://jenkins.io/redirect/groovy-string-interpolation for details.
++ sonar-scanner -Dsonar.projectKey=demo-jenkins -Dsonar.projectName=Demo Jenkins -Dsonar.sources=. -Dsonar.exclusions=**/*_test.go -Dsonar.host.url=http://20.205.129.74:9000 -Dsonar.token=******
+04:24:01.327 INFO  Scanner configuration file: /opt/sonar-scanner/conf/sonar-scanner.properties
+04:24:01.331 INFO  Project root configuration file: NONE
+04:24:01.349 INFO  SonarScanner CLI 6.2.1.4610
+04:24:01.350 INFO  Java 17.0.12 Eclipse Adoptium (64-bit)
+04:24:01.351 INFO  Linux 6.17.0-1011-azure amd64
+04:24:01.379 INFO  User cache: /var/jenkins_home/.sonar/cache
+04:24:02.152 INFO  Communicating with SonarQube Server 9.9.8.100196
+04:24:02.612 INFO  Load global settings
+04:24:02.682 INFO  Load global settings (done) | time=72ms
+04:24:02.684 INFO  Server id: 147B411E-AZ3hW1qYicy4h1CjWMYu
+04:24:02.688 INFO  User cache: /var/jenkins_home/.sonar/cache
+04:24:02.691 INFO  Load/download plugins
+04:24:02.691 INFO  Load plugins index
+04:24:02.746 INFO  Load plugins index (done) | time=55ms
+04:24:02.869 INFO  Load/download plugins (done) | time=178ms
+04:24:03.481 INFO  Process project properties
+04:24:03.490 INFO  Process project properties (done) | time=9ms
+04:24:03.492 INFO  Execute project builders
+04:24:03.493 INFO  Execute project builders (done) | time=1ms
+04:24:03.496 INFO  Project key: demo-jenkins
+04:24:03.496 INFO  Base dir: /var/jenkins_home/workspace/demo-jenkins-pipeline
+04:24:03.496 INFO  Working dir: /var/jenkins_home/workspace/demo-jenkins-pipeline/.scannerwork
+04:24:03.505 INFO  Load project settings for component key: 'demo-jenkins'
+04:24:03.578 INFO  Load project settings for component key: 'demo-jenkins' (done) | time=73ms
+04:24:03.789 INFO  Auto-configuring with CI 'Jenkins'
+04:24:03.795 INFO  Load quality profiles
+04:24:03.888 INFO  Load quality profiles (done) | time=93ms
+04:24:03.902 INFO  Load active rules
+04:24:06.173 INFO  Load active rules (done) | time=2270ms
+04:24:06.181 INFO  Load analysis cache
+04:24:06.194 INFO  Load analysis cache (404) | time=13ms
+04:24:06.315 INFO  Load project repositories
+04:24:06.338 INFO  Load project repositories (done) | time=23ms
+04:24:06.434 INFO  Indexing files...
+04:24:06.435 INFO  Project configuration:
+04:24:06.435 INFO    Excluded sources: **/*_test.go
+04:24:06.635 INFO  4 files indexed
+04:24:06.635 INFO  0 files ignored because of inclusion/exclusion patterns
+04:24:06.635 INFO  0 files ignored because of scm ignore settings
+04:24:06.637 INFO  Quality profile for go: Sonar way
+04:24:06.637 INFO  ------------- Run sensors on module Demo Jenkins
+04:24:06.728 INFO  Load metrics repository
+04:24:06.754 INFO  Load metrics repository (done) | time=26ms
+04:24:08.195 INFO  Sensor Code Quality and Security for Go [go]
+04:24:08.197 INFO  1 source file to be analyzed
+04:24:08.343 INFO  1/1 source file has been analyzed
+04:24:08.344 INFO  Sensor Code Quality and Security for Go [go] (done) | time=149ms
+04:24:08.344 INFO  Sensor JaCoCo XML Report Importer [jacoco]
+04:24:08.345 INFO  'sonar.coverage.jacoco.xmlReportPaths' is not defined. Using default locations: target/site/jacoco/jacoco.xml,target/site/jacoco-it/jacoco.xml,build/reports/jacoco/test/jacocoTestReport.xml
+04:24:08.345 INFO  No report imported, no coverage information will be imported by JaCoCo XML Report Importer
+04:24:08.345 INFO  Sensor JaCoCo XML Report Importer [jacoco] (done) | time=1ms
+04:24:08.345 INFO  Sensor CSS Rules [javascript]
+04:24:08.346 INFO  No CSS, PHP, HTML or VueJS files are found in the project. CSS analysis is skipped.
+04:24:08.346 INFO  Sensor CSS Rules [javascript] (done) | time=1ms
+04:24:08.346 INFO  Sensor C# Project Type Information [csharp]
+04:24:08.347 INFO  Sensor C# Project Type Information [csharp] (done) | time=1ms
+04:24:08.347 INFO  Sensor C# Analysis Log [csharp]
+04:24:08.358 INFO  Sensor C# Analysis Log [csharp] (done) | time=11ms
+04:24:08.358 INFO  Sensor C# Properties [csharp]
+04:24:08.359 INFO  Sensor C# Properties [csharp] (done) | time=0ms
+04:24:08.359 INFO  Sensor HTML [web]
+04:24:08.361 INFO  Sensor HTML [web] (done) | time=2ms
+04:24:08.361 INFO  Sensor TextAndSecretsSensor [text]
+04:24:08.373 INFO  1 source file to be analyzed
+04:24:08.383 INFO  1/1 source file has been analyzed
+04:24:08.384 INFO  Sensor TextAndSecretsSensor [text] (done) | time=23ms
+04:24:08.385 INFO  Sensor VB.NET Project Type Information [vbnet]
+04:24:08.385 INFO  Sensor VB.NET Project Type Information [vbnet] (done) | time=0ms
+04:24:08.385 INFO  Sensor VB.NET Analysis Log [vbnet]
+04:24:08.397 INFO  Sensor VB.NET Analysis Log [vbnet] (done) | time=12ms
+04:24:08.397 INFO  Sensor VB.NET Properties [vbnet]
+04:24:08.397 INFO  Sensor VB.NET Properties [vbnet] (done) | time=0ms
+04:24:08.397 INFO  Sensor IaC Docker Sensor [iac]
+04:24:08.402 INFO  0 source files to be analyzed
+04:24:08.451 INFO  0/0 source files have been analyzed
+04:24:08.451 INFO  Sensor IaC Docker Sensor [iac] (done) | time=54ms
+04:24:08.456 INFO  ------------- Run sensors on project
+04:24:08.537 INFO  Sensor Analysis Warnings import [csharp]
+04:24:08.538 INFO  Sensor Analysis Warnings import [csharp] (done) | time=1ms
+04:24:08.538 INFO  Sensor Zero Coverage Sensor
+04:24:08.546 INFO  Sensor Zero Coverage Sensor (done) | time=8ms
+04:24:08.557 INFO  CPD Executor Calculating CPD for 1 file
+04:24:08.564 INFO  CPD Executor CPD calculation finished (done) | time=7ms
+04:24:08.656 INFO  Analysis report generated in 87ms, dir size=123.2 kB
+04:24:08.677 INFO  Analysis report compressed in 21ms, zip size=16.4 kB
+04:24:08.695 INFO  Analysis report uploaded in 17ms
+04:24:08.697 INFO  ANALYSIS SUCCESSFUL, you can find the results at: http://20.205.129.74:9000/dashboard?id=demo-jenkins
+04:24:08.697 INFO  Note that you will be able to access the updated dashboard once the server has processed the submitted analysis report
+04:24:08.697 INFO  More about the report processing at http://20.205.129.74:9000/api/ce/task?id=AZ3m7fjx6hXUY3utH2DF
+04:24:08.712 INFO  Analysis total time: 5.712 s
+04:24:08.713 INFO  EXECUTION SUCCESS
+04:24:08.714 INFO  Total time: 7.425s
+[Pipeline] }
+[Pipeline] // withSonarQubeEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Quality Gate)
+[Pipeline] timeout
+Timeout set to expire in 5 min 0 sec
+[Pipeline] {
+[Pipeline] waitForQualityGate
+Checking status of SonarQube task 'AZ3m7fjx6hXUY3utH2DF' on server 'sonarqube'
+SonarQube task 'AZ3m7fjx6hXUY3utH2DF' status is 'IN_PROGRESS'
+SonarQube task 'AZ3m7fjx6hXUY3utH2DF' status is 'SUCCESS'
+SonarQube task 'AZ3m7fjx6hXUY3utH2DF' completed. Quality gate is 'OK'
+[Pipeline] }
+[Pipeline] // timeout
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy)
+Stage "Deploy" skipped due to when conditional
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] cleanWs
+[WS-CLEANUP] Deleting project workspace...
+[WS-CLEANUP] Deferred wipeout is used...
+[WS-CLEANUP] done
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
+Warning: A secret was passed to "sh" using Groovy String interpolation, which is insecure.
+		 Affected argument(s) used the following variable(s): [DISCORD_WEBHOOK]
+		 See https://jenkins.io/redirect/groovy-string-interpolation for details.
++ curl -s -X POST **** -H Content-Type: application/json -d {"embeds":[{"title":"Build Berhasil","description":"**Job:** demo-jenkins-pipeline\n**Build:** #17\n**URL:** http://20.205.129.74:8080/job/demo-jenkins-pipeline/17/","color":3066993}]}
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
