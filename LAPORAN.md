@@ -306,8 +306,6 @@ Buka `http://20.205.129.74:9000`
 
 ## 9. Jenkinsfile
 
-Buat file `Jenkinsfile` di root repository:
-
 ```groovy
 pipeline {
     agent any
@@ -392,14 +390,6 @@ pipeline {
         }
     }
 }
-```
-
-### Push ke Repository
-
-```bash
-git add Jenkinsfile
-git commit -m "ci: add pipeline for Go project with SonarQube and Discord notification"
-git push origin main
 ```
 
 ---
