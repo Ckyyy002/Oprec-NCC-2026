@@ -88,23 +88,23 @@ PULL MODEL (Prometheus):
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                        PROMETHEUS                            │
-│                                                              │
-│  ┌─────────────┐    ┌──────────────┐    ┌───────────────┐  │
-│  │  Retrieval  │    │    TSDB       │    │  HTTP Server  │  │
-│  │  (Scraper)  │───►│ (Time Series │───►│  (Query API)  │  │
-│  │             │    │   Database)  │    │               │  │
-│  └─────────────┘    └──────────────┘    └───────────────┘  │
+│                        PROMETHEUS                           │
+│                                                             │
+│  ┌─────────────┐    ┌──────────────┐    ┌───────────────┐   │
+│  │  Retrieval  │    │    TSDB      │    │  HTTP Server  │   │
+│  │  (Scraper)  │───►│ (Time Series │───►│  (Query API)  │   │
+│  │             │    │   Database)  │    │               │   │
+│  └─────────────┘    └──────────────┘    └───────────────┘   │
 │         │                                       ▲           │
 │         │ scrape setiap                         │           │
 │         │ 15 detik                           PromQL         │
 │         ▼                                    query          │
-│  ┌─────────────┐                               │           │
-│  │ Service     │                        ┌──────┴──────┐    │
-│  │ Discovery   │                        │   Grafana   │    │
-│  │ (static,    │                        │   / Client  │    │
-│  │  K8s, dll)  │                        └─────────────┘    │
-│  └─────────────┘                                           │
+│  ┌─────────────┐                               │            │
+│  │ Service     │                        ┌──────┴──────┐     │
+│  │ Discovery   │                        │   Grafana   │     │
+│  │ (static,    │                        │   / Client  │     │
+│  │  K8s, dll)  │                        └─────────────┘     │
+│  └─────────────┘                                            │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -176,7 +176,7 @@ Node Exporter mengekspos ratusan metrics. Berikut yang paling penting:
 
 **CPU:**
 ```
-node_cpu_seconds_total{cpu, mode}     # Waktu CPU dalam setiap mode (user, system, idle, iowait, steal, ...)
+node_cpu_seconds_total{cpu, mode}      # Waktu CPU dalam setiap mode (user, system, idle, iowait, steal, ...)
 node_load1                             # Load average 1 menit
 node_load5                             # Load average 5 menit
 node_load15                            # Load average 15 menit
@@ -416,8 +416,8 @@ Normal ──(kondisi terpenuhi)──► Pending ──(durasi "for" tercapai)�
 # Contoh alert rule
 nama: High CPU Usage
 query: 100 - (avg(rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)
-kondisi: IS ABOVE 85        # Threshold
-for: 2m                     # Harus terpenuhi selama 2 menit terus-menerus
+kondisi: IS ABOVE 85         # Threshold
+for: 2m                      # Harus terpenuhi selama 2 menit terus-menerus
                              # (mencegah false positive dari spike sesaat)
 labels:
   severity: critical
@@ -728,6 +728,6 @@ Prometheus dan Grafana adalah skill yang **sangat dicari** di industri teknologi
 - **Platform Engineer** — Membangun platform monitoring untuk seluruh tim engineering
 - **Cloud Engineer** — Monitoring resource cloud (AWS, GCP, Azure)
 
-Hampir semua perusahaan teknologi skala menengah ke atas — dari startup hingga unicorn — menggunakan Prometheus dan Grafana, atau produk yang dibangun di atasnya (seperti Grafana Cloud, Thanos, Cortex, atau Mimir untuk skala yang lebih besar).
+---
 
 ---
