@@ -153,8 +153,6 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-> **Catatan:** `--web.listen-address=127.0.0.1:9090` memastikan Prometheus hanya bisa diakses dari lokal (keamanan).
-
 ### 3.3 Jalankan Prometheus
 
 ```bash
@@ -166,7 +164,7 @@ sudo systemctl status prometheus
 
 ### Screenshot: Status Prometheus
 
-> 📸 *[Screenshot: `sudo systemctl status prometheus` menunjukkan status `active (running)`]*
+<img width="1891" height="654" alt="Screenshot From 2026-05-10 01-32-02" src="https://github.com/user-attachments/assets/33722671-d346-4e96-8acf-be9d26623c09" />
 
 ### 3.4 Konfigurasi `prometheus.yml`
 
@@ -192,14 +190,9 @@ scrape_configs:
 ```
 
 ```bash
-# Restart setelah edit config
 sudo systemctl restart prometheus
 sudo systemctl status prometheus
 ```
-
-### Screenshot: File prometheus.yml
-
-> 📸 *[Screenshot: isi file `/etc/prometheus/prometheus.yml`]*
 
 ---
 
@@ -216,7 +209,6 @@ cd node_exporter-*.linux-amd64
 
 sudo mv node_exporter /usr/local/bin/
 
-# Buat user khusus
 sudo useradd --no-create-home --shell /bin/false node_exporter
 sudo chown node_exporter:node_exporter /usr/local/bin/node_exporter
 ```
@@ -257,17 +249,7 @@ sudo systemctl status node_exporter
 
 ### Screenshot: Node Exporter Running
 
-> 📸 *[Screenshot: `sudo systemctl status node_exporter` menunjukkan status `active (running)`]*
-
-### Verifikasi Metrics
-
-```bash
-curl -s http://localhost:9100/metrics | head -30
-```
-
-> 📸 *[Screenshot: output curl menampilkan metrics seperti `node_cpu_seconds_total`, `node_memory_MemTotal_bytes`, dll]*
-
----
+<img width="1891" height="654" alt="Screenshot From 2026-05-10 01-32-35" src="https://github.com/user-attachments/assets/f12e89b8-5715-4c5d-9e7d-65d24bff1fb6" />
 
 ## 5. Instalasi dan Konfigurasi Grafana
 
@@ -277,16 +259,13 @@ curl -s http://localhost:9100/metrics | head -30
 sudo apt-get update
 sudo apt-get install -y apt-transport-https wget gnupg
 
-# Tambahkan GPG key Grafana
 sudo mkdir -p /etc/apt/keyrings
 sudo wget -O /etc/apt/keyrings/grafana.asc https://apt.grafana.com/gpg-full.key
 sudo chmod 644 /etc/apt/keyrings/grafana.asc
 
-# Tambahkan repository Grafana
 echo "deb [signed-by=/etc/apt/keyrings/grafana.asc] https://apt.grafana.com stable main" | \
   sudo tee /etc/apt/sources.list.d/grafana.list
 
-# Install
 sudo apt-get update
 sudo apt-get install -y grafana
 ```
@@ -308,19 +287,9 @@ Buka browser dan akses:
 http://57.158.27.100:3000
 ```
 
-Login awal:
-- **Username:** `admin`
-- **Password:** `admin`
-
-Grafana akan meminta untuk mengganti password. Ganti dengan password yang aman.
-
-### Screenshot: Halaman Login Grafana
-
-> 📸 *[Screenshot: halaman login Grafana di `http://57.158.27.100:3000`]*
-
 ### Screenshot: Dashboard Utama Grafana
 
-> 📸 *[Screenshot: halaman home Grafana setelah login berhasil]*
+<img width="1920" height="1124" alt="Screenshot From 2026-05-10 01-37-30" src="https://github.com/user-attachments/assets/d34c5881-94d9-4f26-b03f-941420f27324" />
 
 ---
 
@@ -342,13 +311,7 @@ Grafana akan meminta untuk mengganti password. Ganti dengan password yang aman.
 
 5. Klik **"Save & Test"** — pastikan muncul tanda ✅ hijau
 
-### Screenshot: Konfigurasi Data Source
-
-> 📸 *[Screenshot: form konfigurasi data source Prometheus di Grafana]*
-
-### Screenshot: Data Source Test Berhasil
-
-> 📸 *[Screenshot: pesan "Data source connected and labels found." di Grafana]*
+<img width="1548" height="119" alt="Screenshot From 2026-05-10 01-41-08" src="https://github.com/user-attachments/assets/9a388983-3f80-4a9c-a8cb-98abe7203f3b" />
 
 ### 6.2 Verifikasi Targets di Prometheus
 
@@ -358,13 +321,11 @@ curl -s http://localhost:9090/api/v1/targets | python3 -m json.tool | grep -E '"
 
 ### Screenshot: Prometheus Targets
 
-> 📸 *[Screenshot: output menampilkan semua target dengan status `"health": "up"`]*
+<img width="1565" height="191" alt="Screenshot From 2026-05-10 01-42-39" src="https://github.com/user-attachments/assets/3aa66fbe-9de7-4ca5-96aa-392680e85292" />
 
 ---
 
 ## 7. Custom Dashboard Grafana
-
-Custom dashboard dibuat **tanpa menggunakan template bawaan** (tanpa import dashboard ID 1860). Semua panel dibuat manual menggunakan query PromQL.
 
 ### Cara Membuat Dashboard Baru
 
@@ -420,8 +381,6 @@ Custom dashboard dibuat **tanpa menggunakan template bawaan** (tanpa import dash
 - Kuning: 70–90%
 - Merah: 90–100%
 
-> Gauge menampilkan **nilai CPU saat ini** dalam bentuk jarum/arc berwarna sehingga status server langsung terlihat sekilas.
-
 ---
 
 ### Panel 3 — Memory Usage (Gauge)
@@ -445,8 +404,6 @@ Custom dashboard dibuat **tanpa menggunakan template bawaan** (tanpa import dash
 - Hijau: 0–80%
 - Kuning: 80–95%
 - Merah: 95–100%
-
-> Gauge cocok untuk memory karena pengguna cukup tahu angka persentase saat ini, bukan riwayatnya.
 
 ---
 
@@ -472,8 +429,6 @@ Custom dashboard dibuat **tanpa menggunakan template bawaan** (tanpa import dash
 - Kuning: 75–90%
 - Merah: 90–100%
 
-> Bar gauge lebih intuitif untuk disk karena tampilannya seperti progress bar — mudah dibaca seberapa penuh storage tanpa perlu membaca angka.
-
 ---
 
 ### Panel 5 — Network Traffic (Time Series)
@@ -498,8 +453,6 @@ rate(node_network_transmit_bytes_total{device!="lo"}[5m])
 ```
 Legend: `Transmit`
 
-> Time series tepat untuk network karena traffic berubah terus — dengan dua line berbeda warna, receive vs transmit langsung bisa dibandingkan.
-
 ---
 
 ### Panel 6 — System Uptime (Stat)
@@ -517,8 +470,6 @@ Legend: `Transmit`
 ```promql
 (time() - node_boot_time_seconds) / 3600
 ```
-
-> Stat menampilkan satu angka besar yang langsung terbaca. Background berwarna hijau memberikan kesan sistem berjalan normal.
 
 ---
 
@@ -551,21 +502,13 @@ node_load15
 ```
 Legend: `Load 15m`
 
-> Setiap query dimasukkan **terpisah** dengan klik **"+ Add query"**. Tambahkan **reference line** (Constant) di angka `2` (jumlah vCPU) sebagai batas normal agar mudah terlihat kapan sistem mulai kewalahan.
-
 ---
 
 ### Screenshot: Custom Dashboard Overview
 
-> 📸 *[Screenshot: tampilan lengkap custom dashboard dengan semua panel]*
+<img width="1526" height="956" alt="image" src="https://github.com/user-attachments/assets/5a6a9863-041f-4bfa-8948-29555b5ae554" />
 
-### Screenshot: Panel CPU (Time Series + Gauge berdampingan)
-
-> 📸 *[Screenshot: panel CPU tren dan gauge nilai saat ini]*
-
-### Screenshot: Panel Disk Bar Gauge
-
-> 📸 *[Screenshot: panel disk usage dalam bentuk bar gauge horizontal]*
+<img width="1504" height="657" alt="image" src="https://github.com/user-attachments/assets/63753e5a-91e0-4958-b258-9d247666a8f6" />
 
 ---
 
@@ -677,11 +620,11 @@ Untuk setiap rule, isi:
 
 ### Screenshot: Alert Rules List
 
-> 📸 *[Screenshot: halaman "Alert rules" di Grafana menampilkan semua rule yang dibuat]*
+<img width="1596" height="376" alt="Screenshot From 2026-05-10 02-19-58" src="https://github.com/user-attachments/assets/b9bcce62-d045-4005-9209-acd8148567e7" />
 
 ### Screenshot: Alert Rule Detail CPU
 
-> 📸 *[Screenshot: detail konfigurasi alert rule CPU Usage]*
+<img width="1546" height="995" alt="image" src="https://github.com/user-attachments/assets/6b5856c8-56ed-410b-8194-05ec6b7152fa" />
 
 ---
 
@@ -694,11 +637,6 @@ Untuk setiap rule, isi:
 3. Klik ⚙️ **Edit Channel → Integrations → Webhooks → New Webhook**
 4. Beri nama (contoh: `Grafana Alerts`)
 5. Klik **Copy Webhook URL**
-
-Contoh format URL:
-```
-https://discord.com/api/webhooks/XXXXXXXXXXXXXXXXXX/YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
-```
 
 ### 10.2 Konfigurasi Contact Point di Grafana
 
@@ -729,15 +667,15 @@ https://discord.com/api/webhooks/XXXXXXXXXXXXXXXXXX/YYYYYYYYYYYYYYYYYYYYYYYYYYYY
 
 ### Screenshot: Contact Point Discord
 
-> 📸 *[Screenshot: konfigurasi contact point Discord di Grafana]*
+<img width="1228" height="677" alt="image" src="https://github.com/user-attachments/assets/15a6e826-a330-4cf3-bb8a-45cf607a8fad" />
 
 ### Screenshot: Test Notifikasi ke Discord
 
-> 📸 *[Screenshot: pesan test yang diterima di channel Discord]*
+<img width="1218" height="734" alt="screenshot-2026-05-10_11 06 04" src="https://github.com/user-attachments/assets/386acd50-218c-42f9-ae10-36d991b244f9" />
 
 ### Screenshot: Notifikasi Alert di Discord
 
-> 📸 *[Screenshot: pesan alert yang diterima di channel Discord saat CPU tinggi]*
+<img width="980" height="478" alt="screenshot-2026-05-10_11 09 02" src="https://github.com/user-attachments/assets/8821d3cf-3a98-4c84-879e-83eed1e42343" />
 
 ---
 
@@ -822,7 +760,7 @@ Legend: `Write`
 | **Unit** | ops/sec (iops) |
 | **Color mode** | Background |
 | **Graph mode** | None |
-| **Calculation** | Last (tidak perlu riwayat, cukup nilai sekarang) |
+| **Calculation** | Last |
 
 Menampilkan jumlah operasi baca/tulis per detik saat ini.
 
@@ -837,8 +775,6 @@ Legend: `Read IOPS`
 rate(node_disk_writes_completed_total[5m])
 ```
 Legend: `Write IOPS`
-
-> Stat dipilih karena untuk IOPS cukup tahu nilai saat ini — bukan riwayatnya. Dua kotak stat berdampingan (read dan write) lebih ringkas daripada grafik penuh.
 
 ---
 
@@ -872,8 +808,6 @@ node_memory_MemFree_bytes
 ```
 Legend: `Free`
 
-> Dengan stacking, tiga area warna (used, cache, free) akan membentuk satu blok penuh setara total RAM — sangat intuitif untuk melihat proporsi pemakaian memory secara keseluruhan.
-
 ---
 
 ### Panel 12 — Prediksi Disk Penuh (Stat)
@@ -890,8 +824,6 @@ Legend: `Free`
 ```promql
 predict_linear(node_filesystem_avail_bytes{mountpoint="/"}[6h], 24*3600) / 1073741824
 ```
-
-> Jika nilai yang ditampilkan **negatif atau mendekati 0**, background akan berubah merah sebagai peringatan bahwa disk diprediksi penuh dalam 24 jam ke depan.
 
 ---
 
@@ -918,25 +850,7 @@ max_over_time(rate(node_network_receive_bytes_total{device!="lo"}[5m])[1h:5m])
 ```
 Legend: `Peak Receive`
 
-> Dua line dalam satu panel memudahkan perbandingan antara traffic rata-rata dan traffic puncak — berguna untuk mendeteksi apakah ada lonjakan traffic yang tidak biasa.
-
----
-
-### Screenshot: Panel CPU Stacked per Mode
-
-> 📸 *[Screenshot: panel CPU per mode dalam tampilan stacked area]*
-
-### Screenshot: Panel Memory Stacked Detail
-
-> 📸 *[Screenshot: panel memory detail dalam tampilan stacked area (used, cache, free)]*
-
-### Screenshot: Panel Disk IOPS Stat
-
-> 📸 *[Screenshot: panel disk IOPS menampilkan dua kotak stat read dan write]*
-
-### Screenshot: Panel Prediksi Disk
-
-> 📸 *[Screenshot: panel prediksi disk dengan background hijau/kuning/merah]*
+<img width="1504" height="657" alt="screenshot-2026-05-10_15 35 08" src="https://github.com/user-attachments/assets/89647ab7-7c59-48ad-979e-ce7da319acd2" />
 
 ---
 
@@ -947,50 +861,36 @@ Legend: `Peak Receive`
 ```bash
 sudo apt install stress-ng -y
 
-# Stress 2 core dengan 95% load selama 120 detik
 stress-ng --cpu 2 --cpu-load 95 --timeout 120s
 ```
 
 ### 12.2 Stress Test Memory
 
 ```bash
-# Alokasikan 6.5GB RAM selama 120 detik
 stress-ng --vm 1 --vm-bytes 6500M --vm-keep --timeout 120s
 ```
 
 ### 12.3 Stress Test Disk I/O
 
 ```bash
-# Tulis file besar (~20GB) untuk meningkatkan disk usage
 dd if=/dev/zero of=/tmp/bigfile bs=1M count=20000
 
-# Setelah screenshot, hapus file
 rm /tmp/bigfile
 ```
 
-### Tips: Turunkan Threshold Sementara untuk Demo
-
-Jika resource VM terlalu besar dan stress test tidak cukup memicu alert, ubah sementara threshold di **Grafana → Alerting → Alert rules**:
-
 | Alert | Threshold Normal | Threshold Demo |
 |-------|-----------------|----------------|
-| CPU | IS ABOVE 85 | IS ABOVE 20 |
-| Memory | IS ABOVE 90 | IS ABOVE 20 |
-| Disk | IS ABOVE 80 | IS ABOVE 15 |
-
-Kembalikan ke nilai normal setelah mendapat screenshot notifikasi Discord.
+| CPU | IS ABOVE 85 | IS ABOVE 70 |
+| Memory | IS ABOVE 90 | IS ABOVE 50 |
+| Disk | IS ABOVE 80 | IS ABOVE 70 |
 
 ### Screenshot: CPU Naik Saat Stress Test
 
-> 📸 *[Screenshot: grafik CPU di Grafana menunjukkan lonjakan saat stress test dijalankan]*
-
-### Screenshot: Alert Terpicu di Grafana
-
-> 📸 *[Screenshot: alert rule berubah menjadi "Firing" di halaman Alert rules Grafana]*
+<img width="1271" height="327" alt="screenshot-2026-05-10_10 48 13" src="https://github.com/user-attachments/assets/5348cebd-6f18-4185-a054-96e11da7b450" />
 
 ### Screenshot: Notifikasi Discord Saat Alert
 
-> 📸 *[Screenshot: pesan Discord dari Grafana webhook saat CPU tinggi]*
+<img width="1194" height="372" alt="image" src="https://github.com/user-attachments/assets/7a2eab96-3499-49d1-bce3-469a037ab69a" />
 
 ---
 
