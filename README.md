@@ -31,8 +31,8 @@ Dalam dunia DevOps dan SRE (Site Reliability Engineering), monitoring adalah bag
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│                   OBSERVABILITY                      │
-│                                                      │
+│                   OBSERVABILITY                    │
+│                                                    │
 │   ┌──────────┐   ┌──────────┐   ┌──────────────┐   │
 │   │ METRICS  │   │  LOGS    │   │   TRACES     │   │
 │   │          │   │          │   │              │   │
