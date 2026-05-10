@@ -31,21 +31,21 @@ Dalam dunia DevOps dan SRE (Site Reliability Engineering), monitoring adalah bag
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│                   OBSERVABILITY                    │
-│                                                    │
-│   ┌──────────┐   ┌──────────┐   ┌──────────────┐   │
-│   │ METRICS  │   │  LOGS    │   │   TRACES     │   │
-│   │          │   │          │   │              │   │
-│   │ Angka    │   │ Teks     │   │ Jejak alur   │   │
-│   │ numerik  │   │ kejadian │   │ request      │   │
-│   │ dari     │   │ yang     │   │ antar        │   │
-│   │ waktu ke │   │ terjadi  │   │ service      │   │
-│   │ waktu    │   │ di sistem│   │              │   │
-│   │          │   │          │   │              │   │
-│   │ Tool:    │   │ Tool:    │   │ Tool:        │   │
-│   │Prometheus│   │ Loki,    │   │ Jaeger,      │   │
-│   │          │   │ ELK Stack│   │ Tempo        │   │
-│   └──────────┘   └──────────┘   └──────────────┘   │
+│                   OBSERVABILITY                     │
+│                                                     │
+│   ┌──────────┐   ┌──────────┐   ┌──────────────┐    │
+│   │ METRICS  │   │  LOGS    │   │   TRACES     │    │ 
+│   │          │   │          │   │              │    │
+│   │ Angka    │   │ Teks     │   │ Jejak alur   │    │
+│   │ numerik  │   │ kejadian │   │ request      │    │
+│   │ dari     │   │ yang     │   │ antar        │    │
+│   │ waktu ke │   │ terjadi  │   │ service      │    │
+│   │ waktu    │   │ di sistem│   │              │    │
+│   │          │   │          │   │              │    │
+│   │ Tool:    │   │ Tool:    │   │ Tool:        │    │
+│   │Prometheus│   │ Loki,    │   │ Jaeger,      │    │
+│   │          │   │ ELK Stack│   │ Tempo        │    │
+│   └──────────┘   └──────────┘   └──────────────┘    │
 └─────────────────────────────────────────────────────┘
 ```
 
