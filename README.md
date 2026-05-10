@@ -49,8 +49,6 @@ Dalam dunia DevOps dan SRE (Site Reliability Engineering), monitoring adalah bag
 └─────────────────────────────────────────────────────┘
 ```
 
-Di project ini, fokus kita adalah pada **Metrics** menggunakan Prometheus dan Grafana.
-
 ### Jenis-jenis Metrics
 
 | Jenis | Deskripsi | Contoh |
