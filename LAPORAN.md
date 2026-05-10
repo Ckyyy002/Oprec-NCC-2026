@@ -75,7 +75,7 @@ Node Exporter (:9100) ──scrape──► Prometheus (:9090) ──query──
 | Detail | Nilai |
 |--------|-------|
 | Provider | Microsoft Azure |
-| OS | Ubuntu 22.04 LTS |
+| OS | Ubuntu 24.04 LTS |
 | Public IP | `57.158.27.100` |
 | CPU | 2 vCPU |
 | RAM | 7.7 GB |
