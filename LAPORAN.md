@@ -1,11 +1,11 @@
-# 📊 Laporan Penugasan: Monitoring System dengan Prometheus & Grafana
+# Laporan Penugasan: Monitoring System dengan Prometheus & Grafana
 
 > **Oprec NCC Laboratory 2026 — Pertemuan 3**
 > VM Azure — Public IP: `57.158.27.100`
 
 ---
 
-## 📋 Daftar Isi
+## Daftar Isi
 
 1. [Deskripsi Arsitektur Sistem Monitoring](#1-deskripsi-arsitektur-sistem-monitoring)
 2. [Infrastruktur yang Digunakan](#2-infrastruktur-yang-digunakan)
@@ -634,7 +634,7 @@ Untuk setiap rule, isi:
 
 1. Buka Discord Server
 2. Pilih channel yang ingin menerima notifikasi
-3. Klik ⚙️ **Edit Channel → Integrations → Webhooks → New Webhook**
+3. Klik **Edit Channel → Integrations → Webhooks → New Webhook**
 4. Beri nama (contoh: `Grafana Alerts`)
 5. Klik **Copy Webhook URL**
 
