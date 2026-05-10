@@ -1,7 +1,5 @@
 # 📡 Materi: Prometheus & Grafana — Sistem Monitoring Modern
 
-> **Oprec NCC Laboratory 2026 — Pertemuan 3**
-
 ---
 
 ## 📋 Daftar Isi
@@ -733,5 +731,3 @@ Prometheus dan Grafana adalah skill yang **sangat dicari** di industri teknologi
 Hampir semua perusahaan teknologi skala menengah ke atas — dari startup hingga unicorn — menggunakan Prometheus dan Grafana, atau produk yang dibangun di atasnya (seperti Grafana Cloud, Thanos, Cortex, atau Mimir untuk skala yang lebih besar).
 
 ---
-
-> 📝 **Dibuat untuk keperluan Open Recruitment NCC Laboratory 2026 — Pertemuan 3**
